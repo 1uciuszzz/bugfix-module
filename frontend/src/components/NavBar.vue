@@ -1,9 +1,8 @@
 <template>
   <div class="navbar shadow-md">
     <div class="flex-1">
-      <font-awesome-icon icon="wrench" />
       <router-link to="/" class="btn btn-ghost normal-case text-xl"
-        >Bugfix - Module</router-link
+        ><font-awesome-icon icon="wrench" />Bugfix - Module</router-link
       >
     </div>
     <div class="flex-none">

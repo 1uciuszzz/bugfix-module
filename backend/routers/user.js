@@ -30,7 +30,7 @@ user.get("/", async (req, res, next) => {
   const { authorization } = req.headers;
   const result = decode(authorization);
   if (result) {
-    const data = await UserModel.findById({ _id: result._id });
+    const data = await UserModel.findById(result._id);
     return res.json({
       status: true,
       data: {
