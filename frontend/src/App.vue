@@ -1,7 +1,7 @@
 <template>
-  <div class="h-screen">
+  <div class="h-screen flex flex-col">
     <NavBarVue />
-    <router-view></router-view>
+    <router-view class="flex-1 overflow-auto"></router-view>
   </div>
 </template>
 
