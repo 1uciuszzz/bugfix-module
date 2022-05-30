@@ -8,11 +8,10 @@
               <router-link class="nav-btn" to="/manager/person">PersonManager</router-link>
             </li>
             <li>
-              <a>Item 3</a>
+              <a>BugList</a>
             </li>
-
             <li>
-              <a>Item 3</a>
+              <a>TestList</a>
             </li>
           </ul>
         </div>

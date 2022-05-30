@@ -5,7 +5,7 @@ const BugSchema = mongoose.Schema({
   bugtype:String,
   start:{
     type:String,
-    default:new Date().toLocaleString
+    default:new Date().toLocaleString()
   },
   end:{
       type:String,
@@ -18,7 +18,8 @@ const BugSchema = mongoose.Schema({
   devname:String,
   devid:String,
   level:Number,
-  testid:String
+  testid:String,
+  featureid:String
 
 });
 

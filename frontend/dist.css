@@ -3337,15 +3337,6 @@ body[dir="rtl"] .checkbox:checked,
   background-color: rgb(107 114 128 / var(--tw-bg-opacity));
 }
 
-.bg-base-100 {
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--b1) / var(--tw-bg-opacity));
-}
-
-.fill-current {
-  fill: currentColor;
-}
-
 .p-0 {
   padding: 0px;
 }
