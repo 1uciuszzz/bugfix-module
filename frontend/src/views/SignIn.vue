@@ -51,10 +51,11 @@ const handle_signin = async () => {
   });
   if (result.status) {
     localStorage.setItem("token", result.token);
-    bugfixStore.get_user_info();
+    console.log(result);
     switch (result.type) {
       case "0":
         router.replace("/manager");
+
         return ;
       case "1":
         router.replace("/test");
@@ -62,6 +63,7 @@ const handle_signin = async () => {
       case "2":
         router.replace("/developer");
         return ;
+
     }
   } else {
     alert(result.msg);
