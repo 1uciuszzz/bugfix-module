@@ -30,7 +30,7 @@ bug.get("/getallbug", async (req, res, next) => {
 bug.post("/addbug", async (req, res, next) => {
     const { authorization } = req.headers;
     const result = decode(authorization);
-    let { bugname, bugtype, devname, devid, level } = req.body
+    let { bugname, bugtype, devname, devid, level ,featureid } = req.body
     if (result) {
         if (result.type == 3) {
             res.json({
@@ -38,7 +38,7 @@ bug.post("/addbug", async (req, res, next) => {
                 msg: "权限不够",
             })
         } else {
-            let reply = await BugModel.insert({ bugname, bugtype, devname, devid, level, testid: result.id })
+            let reply = await BugModel.insert({ bugname, bugtype, devname, devid, level, testid: result.id ,featureid })
             if (reply.acknowledged) {
                 res.json({
                     status: true,
