@@ -2,17 +2,20 @@ import mongoose from "mongoose";
 
 const FeatureSchema = mongoose.Schema({
   name: String,
-  devid: String,
+  devid: mongoose.Types.ObjectId,
   devname: String,
   start: {
     type: String,
-    default: new Date().toUTCString(),
+    default: new Date().toISOString(),
   },
   end: {
     type: String,
-    default: null,
+    default: "",
   },
-  status: String,
+  status: {
+    type: String,
+    default: "1",
+  },
   level: String,
 });
 
