@@ -38,11 +38,12 @@ bug.post("/addbug", async (req, res, next) => {
                 msg: "权限不够",
             })
         } else {
-            let reply = await BugModel.insert({ bugname, bugtype, devname, devid, level, testid: result.id ,featureid })
-            if (reply.acknowledged) {
+            let reply = await BugModel.create({ bugname, bugtype, devname, devid, level, testid: result.id ,featureid })
+            if (Object.keys(reply).length) {
                 res.json({
                     status: true,
-                    msg: "新增成功"
+                    msg: "新增成功",
+                    data:reply
                 })
             } else {
                 res.json({
@@ -59,9 +60,9 @@ bug.post("/addbug", async (req, res, next) => {
 bug.patch("/upadtebug", async (req, res, next) => {
     const { authorization } = req.headers;
     const result = decode(authorization);
-    let { bugid, bugtype} = req.body
+    let { bugid, bugstatus} = req.body
     if (result) {
-       let reply =  await BugModel.updateOne({_id:bugid},{$set:{bugtype}})
+       let reply =  await BugModel.updateOne({_id:bugid},{$set:{bugstatus}})
        if(reply.acknowledged==1){
            res.json({
             status: true, msg: "修改成功" 
