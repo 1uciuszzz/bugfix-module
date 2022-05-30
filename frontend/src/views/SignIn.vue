@@ -51,13 +51,17 @@ const handle_signin = async () => {
   });
   if (result.status) {
     localStorage.setItem("token", result.token);
+    console.log(result);
     switch (result.type) {
       case "0":
         router.replace("/manager");
+        return;
       case "1":
-        router.replace("/");
+        router.replace("/test");
+        return;
       case "2":
         router.replace("/developer");
+        return;
     }
   } else {
     alert(result.msg);

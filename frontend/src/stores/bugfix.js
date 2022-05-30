@@ -5,6 +5,7 @@ const useBugfixStore = defineStore("bugfix", {
   state: () => {
     return {
       user_info: {},
+      dev_features: [],
     };
   },
   actions: {

@@ -14,7 +14,7 @@
       <div class="form-control">
         <label class="input-group input-group-md">
           <span>筛选</span>
-          <select class="select select-bordered">
+          <select v-model="status" class="select select-bordered">
             <option disabled selected>全部</option>
             <option value="0">待完成</option>
             <option value="1">待测试</option>
@@ -25,85 +25,7 @@
       </div>
     </header>
     <main class="overflow-x-auto">
-      <table class="table w-full">
-        <thead>
-          <tr>
-            <th>序号</th>
-            <th>功能</th>
-            <th>描述</th>
-            <th>状态</th>
-            <th>操作</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="hover">
-            <th>1</th>
-            <td>Cy Ganderton</td>
-            <td>Quality Control Specialist</td>
-            <td>Blue</td>
-            <td>
-              <div>
-                <DeveloperStatusChangeModalVue :label="'完成'" />
-              </div>
-            </td>
-          </tr>
-          <tr class="hover">
-            <th>2</th>
-            <td>Hart Hagerty</td>
-            <td>Desktop Support Technician</td>
-            <td>Purple</td>
-            <td>
-              <div>
-                <DeveloperStatusChangeModalVue :label="'完成'" />
-              </div>
-            </td>
-          </tr>
-          <tr class="hover">
-            <th>3</th>
-            <td>Brice Swyre</td>
-            <td>Tax Accountant</td>
-            <td>Red</td>
-            <td>
-              <div>
-                <DeveloperStatusChangeModalVue :label="'完成'" />
-              </div>
-            </td>
-          </tr>
-          <tr class="hover">
-            <th>3</th>
-            <td>Brice Swyre</td>
-            <td>Tax Accountant</td>
-            <td>Red</td>
-            <td>
-              <div>
-                <DeveloperStatusChangeModalVue :label="'完成'" />
-              </div>
-            </td>
-          </tr>
-          <tr class="hover">
-            <th>3</th>
-            <td>Brice Swyre</td>
-            <td>Tax Accountant</td>
-            <td>Red</td>
-            <td>
-              <div>
-                <DeveloperStatusChangeModalVue :label="'完成'" />
-              </div>
-            </td>
-          </tr>
-          <tr class="hover">
-            <th>3</th>
-            <td>Brice Swyre</td>
-            <td>Tax Accountant</td>
-            <td>Red</td>
-            <td>
-              <div>
-                <DeveloperStatusChangeModalVue :label="'完成'" />
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <DeveloperTable />
     </main>
     <footer class="grid place-items-center p-2">
       <div class="btn-group">
@@ -119,11 +41,14 @@
 </template>
 
 <script setup>
-import DeveloperStatusChangeModalVue from "../components/DeveloperStatusChangeModal.vue";
+import DeveloperTable from "./DeveloperTable.vue";
 import useBugfixStore from "../stores/bugfix";
 import { useRouter } from "vue-router";
-import { reactive } from "vue";
+import { ref } from "@vue/reactivity";
 const bugfixStore = useBugfixStore();
 const router = useRouter();
-const list = reactive([]);
+const status = ref("");
+const list = () => {
+  return bugfixStore.dev_features;
+};
 </script>
