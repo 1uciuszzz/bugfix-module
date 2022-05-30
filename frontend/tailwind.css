@@ -1,5 +1,8 @@
 @tailwind base;
 @tailwind components;
+.nav-btn{
+    @apply bg-red-200 rounded-md
+}
 @tailwind utilities;
 
 .singin_bg {
