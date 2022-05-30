@@ -29,18 +29,26 @@ const router = createRouter({
       component: DeveloperView,
     },
     {
-      path:"/manager",
-      name:"manager",
-      component:()=>import("../views/ManagerView.vue"),
-      children:[{
-        path:"",
-        name:"",
-        component:()=>import("../components/PersonManage.vue")
-      },{
-        path:"person",
-        name:"person",
-        component:()=>import("../components/PersonManage.vue")
-      }]
+      path: "/manager",
+      name: "manager",
+      component: () => import("../views/ManagerView.vue"),
+      children: [
+        {
+          path: "",
+          name: "",
+          component: () => import("../components/PersonManage.vue"),
+        },
+        {
+          path: "person",
+          name: "person",
+          component: () => import("../components/PersonManage.vue"),
+        },
+      ],
+    },
+    {
+      path: "/test",
+      name: "test",
+      component: () => import("../views/TestView.vue"),
     },
     {
       path: "/notfound",
