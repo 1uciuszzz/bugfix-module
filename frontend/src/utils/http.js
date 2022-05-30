@@ -8,8 +8,13 @@ const api = {
   feature: "/feature",
   auth: "/auth",
   user: "/user",
+
+  userList:"/user/getall",
+  featureList:"/feature",
+
   getTestList:"/test/showtest", //获取所有测试
   addTestItem:"/test/addtest" //新增测试
+
 };
 
 export { http, api };

@@ -56,13 +56,13 @@ const handle_signin = async () => {
       case "0":
         router.replace("/manager");
 
-        return ;
+        return;
       case "1":
-        router.replace("/test");
-        return ;
+        router.replace("/");
+        return;
       case "2":
         router.replace("/developer");
-        return ;
+        return;
 
     }
   } else {
