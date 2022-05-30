@@ -3,6 +3,7 @@ import NotFound from "../views/NotFound.vue";
 import HomeView from "../views/HomeView.vue";
 import AboutView from "../views/AboutView.vue";
 import DeveloperView from "../views/DeveloperView.vue";
+import SignInView from "../views/SignIn.vue";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -16,6 +17,11 @@ const router = createRouter({
       path: "/about",
       name: "about",
       component: AboutView,
+    },
+    {
+      path: "/signin",
+      name: "signin",
+      component: SignInView,
     },
     {
       path: "/developer",

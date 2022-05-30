@@ -9,7 +9,6 @@ auth.post("/", async (req, res, next) => {
   const { username, password } = req.body;
   const userInDb = await UserModel.findOne({ username });
   if (userInDb) {
-    console.log(verify(password, userInDb.password));
     if (verify(password, userInDb.password)) {
       return res.json({
         status: true,
