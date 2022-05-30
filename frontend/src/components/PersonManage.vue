@@ -28,126 +28,75 @@
             <option>Planet of the Apes</option>
             <option>Star Trek</option>
           </select>
-          
         </div>
-        <button class="btn btn-active">AddPerosn</button>
+        <label for="my-modal-5" class="btn modal-button">ADDPERSON</label>
+
+        <!-- Put this part before </body> tag -->
+        <input type="checkbox" id="my-modal-5" class="modal-toggle" />
+        <div class="modal">
+          <div class="modal-box w-5/12 max-w-5xl">
+            <label for="my-modal-5" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+            <h2 class="text-center text-3xl mb-8">新增人员</h2>
+            <div class="form-control">
+              <label class="input-group flex-1 text-center">
+                <span class="w-4/12">Name</span>
+                <input
+                  type="text"
+                  placeholder="please enter name"
+                  class="input input-bordered w-8/12"
+                  v-model="username"
+                />
+              </label>
+              <label class="input-group flex-1 text-center my-3">
+                <span class="w-4/12">PassWord</span>
+                <input
+                  type="text"
+                  placeholder="please enter passworld"
+                  class="input input-bordered w-8/12"
+                  v-model="password"
+                />
+              </label>
+              <label class="input-group flex-1 text-center">
+                <span class="w-4/12">Job</span>
+                <select class="select select-bordered w-8/12" v-model="type">
+                  <option disabled selected value>select role</option>
+                  <option value="0">Manager</option>
+                  <option value="1">Test</option>
+                  <option value="2">Developer</option>
+                </select>
+              </label>
+            </div>
+            <div class="modal-action">
+              <label for="my-modal-5" class="btn" @click="adduser">添加</label>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="overflow-x-auto w-full">
-      <table class="table w-full">
+      <table class="table w-full text-center">
         <!-- head -->
         <thead>
           <tr>
-            <th>
-              <label>
-                <input type="checkbox" class="checkbox" />
-              </label>
-            </th>
-            <th>Name</th>
-            <th>Job</th>
-            <th>Favorite Color</th>
+            <th>NAME</th>
+            <th>JOB</th>
+
             <th>Operate</th>
           </tr>
         </thead>
         <tbody>
           <!-- row 1 -->
-          <tr>
+          <tr v-for="(item,index) in userStore.userList" :key="index">
+            <th>{{item.username}}</th>
             <th>
-              <label>
-                <input type="checkbox" class="checkbox" />
-              </label>
+              <button class="btn btn-primary" v-if="item.type==1">TEST</button>
+              <button class="btn btn-secondary" v-else-if="item.type==2">DEVELOPER</button>
+              <button class="btn btn-accent" v-else>Manager</button>
             </th>
-            <td>
-              <div class="flex items-center space-x-3">
-                <div>
-                  <div class="font-bold">Hart Hagerty</div>
-                  <div class="text-sm opacity-50">United States</div>
-                </div>
-              </div>
-            </td>
-            <td>
-              Zemlak, Daniel and Leannon
-              <br />
-              <span class="badge badge-ghost badge-sm">Desktop Support Technician</span>
-            </td>
-            <td>Purple</td>
             <th>
-              <button class="btn btn-ghost btn-xs">delete</button>
+              <button class="btn btn-accent">DELETE</button>
             </th>
           </tr>
-          <tr>
-            <th>
-              <label>
-                <input type="checkbox" class="checkbox" />
-              </label>
-            </th>
-            <td>
-              <div class="flex items-center space-x-3">
-                <div>
-                  <div class="font-bold">Hart Hagerty</div>
-                  <div class="text-sm opacity-50">United States</div>
-                </div>
-              </div>
-            </td>
-            <td>
-              Zemlak, Daniel and Leannon
-              <br />
-              <span class="badge badge-ghost badge-sm">Desktop Support Technician</span>
-            </td>
-            <td>Purple</td>
-            <th>
-              <button class="btn btn-ghost btn-xs">delete</button>
-            </th>
-          </tr>
-          <tr>
-            <th>
-              <label>
-                <input type="checkbox" class="checkbox" />
-              </label>
-            </th>
-            <td>
-              <div class="flex items-center space-x-3">
-                <div>
-                  <div class="font-bold">Hart Hagerty</div>
-                  <div class="text-sm opacity-50">United States</div>
-                </div>
-              </div>
-            </td>
-            <td>
-              Zemlak, Daniel and Leannon
-              <br />
-              <span class="badge badge-ghost badge-sm">Desktop Support Technician</span>
-            </td>
-            <td>Purple</td>
-            <th>
-              <button class="btn btn-ghost btn-xs">delete</button>
-            </th>
-          </tr>
-          <tr>
-            <th>
-              <label>
-                <input type="checkbox" class="checkbox" />
-              </label>
-            </th>
-            <td>
-              <div class="flex items-center space-x-3">
-                <div>
-                  <div class="font-bold">Hart Hagerty</div>
-                  <div class="text-sm opacity-50">United States</div>
-                </div>
-              </div>
-            </td>
-            <td>
-              Zemlak, Daniel and Leannon
-              <br />
-              <span class="badge badge-ghost badge-sm">Desktop Support Technician</span>
-            </td>
-            <td>Purple</td>
-            <th>
-              <button class="btn btn-ghost btn-xs">delete</button>
-            </th>
-          </tr>
-
         </tbody>
       </table>
     </div>
@@ -163,8 +112,28 @@
   </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import { reactive, onMounted, ref } from "vue";
+import userListStore from "../stores/userList";
+const userStore = userListStore();
+
+let username = ref();
+let password = ref();
+let type = ref("");
+onMounted(async () => {
+  userStore.initUserList();
+});
+let adduser =async () => {
+  if(username.value&&password.value&&type.value){
+    userStore.addUser({
+    username:username.value,
+    password:password.value,
+    type:type.value
+  })
+  }else{
+    alert("请输入完整参数")
+  }
+};
 </script>
 
 <style>

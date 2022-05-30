@@ -28,6 +28,7 @@ const router = createRouter({
       name: "developer",
       component: DeveloperView,
     },
+    
     {
       path: "/manager",
       name: "manager",
@@ -42,6 +43,11 @@ const router = createRouter({
           path: "person",
           name: "person",
           component: () => import("../components/PersonManage.vue"),
+        },
+        {
+          path:"feature",
+          name:"feature",
+          component:()=>import("../components/FeatureList.vue")
         },
       ],
     },

@@ -55,10 +55,13 @@ const handle_signin = async () => {
     switch (result.type) {
       case "0":
         router.replace("/manager");
+        return;
       case "1":
         router.replace("/");
+        return;
       case "2":
         router.replace("/developer");
+        return;
     }
   } else {
     alert(result.msg);

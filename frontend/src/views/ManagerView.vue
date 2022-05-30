@@ -1,11 +1,14 @@
 <template>
   <div class="container mx-auto">
-    <div class="bg-gray-500 mb-8">
-      <div class="navbar bg-gray-500">
+    <div class=" my-8 bg-slate-400 rounded-md">
+      <div class="navbar ">
         <div class="flex-none">
           <ul class="menu menu-horizontal p-0">
             <li>
-              <router-link class="nav-btn" to="/manager/person">PersonManager</router-link>
+              <router-link class="nav-btn" to="/manager/person">PersonManage</router-link>
+            </li>
+            <li>
+              <router-link class="nav-btn ml-5" to="/manager/feature">FeatureList</router-link>
             </li>
             <li>
               <a>BugList</a>
@@ -13,6 +16,7 @@
             <li>
               <a>TestList</a>
             </li>
+             
           </ul>
         </div>
       </div>

@@ -8,6 +8,8 @@ const api = {
   feature: "/feature",
   auth: "/auth",
   user: "/user",
+  userList:"/user/getall",
+  FeatureList:"/feature"
 };
 
 export { http, api };
