@@ -51,7 +51,6 @@ const handle_signin = async () => {
   });
   if (result.status) {
     localStorage.setItem("token", result.token);
-    bugfixStore.get_user_info();
     switch (result.type) {
       case "0":
         router.replace("/manager");

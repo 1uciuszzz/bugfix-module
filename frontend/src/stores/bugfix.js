@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
 import { http, api } from "../utils/http.js";
+import router from "./../router/index";
 const useBugfixStore = defineStore("bugfix", {
   state: () => {
     return {
-      feature_by_dev: [],
       user_info: {},
     };
   },
@@ -16,17 +16,16 @@ const useBugfixStore = defineStore("bugfix", {
       const { data } = await http.get(api.user, {
         headers: { Authorization: localStorage.getItem("token") },
       });
-      if (data.status) {
-        this.user_info = data.data;
+      if (!data.status) {
+        router.replace("/signin");
       }
+      this.user_info = data.data;
     },
-    async get_features_by_dev(payload) {
+    async get_features_by_filter(payload) {
       const { data } = await http.get(api.feature, {
-        params: { devid: payload.devid },
+        params: payload,
       });
-      if (data.status) {
-        this.feature_by_dev = data.data;
-      }
+      return data;
     },
   },
 });
