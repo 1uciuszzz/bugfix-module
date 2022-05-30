@@ -23,8 +23,14 @@ feature.get("/", async (req, res, next) => {
 
 feature.post("/", async (req, res, next) => {
   const { authorization } = req.headers;
+  if (!authorization) {
+    return res.json({
+      status: false,
+      msg: "没有token",
+    });
+  }
   const tokenData = decode(authorization);
-  if (!tokenData.type === "0") {
+  if (tokenData.type !== "0") {
     return res.json({
       status: false,
       msg: "您没有权限创建开发",
@@ -68,8 +74,14 @@ feature.patch("/:id", async (req, res, next) => {
 
 feature.delete("/:id", async (req, res, next) => {
   const { authorization } = req.headers;
+  if (!authorization) {
+    return res.json({
+      status: false,
+      msg: "没有token",
+    });
+  }
   const tokenData = decode(authorization);
-  if (!tokenData.type === "0") {
+  if (tokenData.type !== "0") {
     return res.json({
       status: false,
       msg: "您没有权限删除开发",
