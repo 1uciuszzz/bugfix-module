@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "1.0.0",
   "scripts": {
-    "start": "vite --port 8080",
+    "start": "vite --port 80",
     "dev": "npx tailwindcss -i tailwind.css -o dist.css --watch"
   },
   "dependencies": {
