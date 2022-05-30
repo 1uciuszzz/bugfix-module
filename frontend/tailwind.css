@@ -4,3 +4,8 @@
     @apply bg-red-200 rounded-md
 }
 @tailwind utilities;
+
+.singin_bg {
+  background-image: url(./src/assets/signin_backgroud.svg);
+  background-size: cover;
+}
