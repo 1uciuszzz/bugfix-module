@@ -28,6 +28,7 @@ const router = createRouter({
       name: "developer",
       component: DeveloperView,
     },
+    
     {
       path: "/manager",
       name: "manager",
@@ -43,12 +44,34 @@ const router = createRouter({
           name: "person",
           component: () => import("../components/PersonManage.vue"),
         },
+        {
+          path:"feature",
+          name:"feature",
+          component:()=>import("../components/FeatureList.vue")
+        },
       ],
     },
     {
       path: "/test",
       name: "test",
       component: () => import("../views/TestView.vue"),
+      children:[
+        {
+          path:'',
+          name:"",
+          component:()=>import("../components/TestChildAddTest.vue")
+        },
+        {
+          path:"addtest",
+          name:"addtest",
+          component:()=>import("../components/TestChildAddTest.vue")
+        },
+        {
+          path:"addbug",
+          name:"addbug",
+          component:()=>import("../components/TestChildAddBug.vue")
+        }
+      ]
     },
     {
       path: "/notfound",

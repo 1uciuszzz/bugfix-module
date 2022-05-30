@@ -50,4 +50,25 @@ user.get("/", async (req, res, next) => {
   }
 });
 
+user.get("/getall", async (req, res, nex) => {
+  const { authorization } = req.headers;
+  if (!authorization) {
+    return res.json({
+      status: false,
+      msg: "没有token",
+    });
+  }
+  const result = decode(authorization);
+  if (result) {
+    let data = await UserModel.find();
+    res.json({
+      status: true,
+      msg: "获取成功" ,
+      data
+    })
+  } else {
+    return res.json({ status: false, msg: "无效的token" });
+  }
+})
+
 export default user;

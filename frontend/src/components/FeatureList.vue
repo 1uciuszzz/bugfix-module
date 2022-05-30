@@ -29,7 +29,7 @@
             <option>Star Trek</option>
           </select>
         </div>
-        <label for="my-modal-5" class="btn modal-button">ADDPERSON</label>
+        <label for="my-modal-5" class="btn modal-button">ADDFEATURE</label>
 
         <!-- Put this part before </body> tag -->
         <input type="checkbox" id="my-modal-5" class="modal-toggle" />
@@ -38,36 +38,42 @@
             <label for="my-modal-5" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
             <h2 class="text-center text-3xl mb-8">新增人员</h2>
             <div class="form-control">
-              <label class="input-group flex-1 text-center">
-                <span class="w-4/12">Name</span>
+              <label class="input-group flex-1 text-center ">
+                <span class="w-4/12">Level</span>
                 <input
                   type="text"
-                  placeholder="please enter name"
+                  placeholder="please enter Level"
                   class="input input-bordered w-8/12"
-                  v-model="username"
+                  v-model="level"
                 />
               </label>
               <label class="input-group flex-1 text-center my-3">
-                <span class="w-4/12">PassWord</span>
+                <span class="w-4/12">FeatureName</span>
                 <input
                   type="text"
-                  placeholder="please enter passworld"
+                  placeholder="please enter featurename"
                   class="input input-bordered w-8/12"
-                  v-model="password"
+                  v-model="featurename"
                 />
               </label>
+              
+              <label class="input-group flex-1 text-center mb-3">
+                <span class="w-4/12">DevName</span>
+                <select class="select select-bordered w-8/12" v-model="devname">
+                  <option disabled selected value>Select Developer</option>
+                  <option :value="item.username" v-for="(item,index) in devList" :key="index">{{item.username}}</option>
+                </select>
+              </label>
               <label class="input-group flex-1 text-center">
-                <span class="w-4/12">Job</span>
-                <select class="select select-bordered w-8/12" v-model="type">
-                  <option disabled selected value>select role</option>
-                  <option value="0">Manager</option>
-                  <option value="1">Test</option>
-                  <option value="2">Developer</option>
+                <span class="w-4/12">DevId</span>
+                <select class="select select-bordered w-8/12" v-model="devId" disabled>
+                  <option disabled selected value>Select DeveloperId</option>
+                  <option :value="item._id" v-for="(item,index) in devList" :key="index">{{item._id}}</option>
                 </select>
               </label>
             </div>
             <div class="modal-action">
-              <label for="my-modal-5" class="btn" @click="adduser">添加</label>
+              <label for="my-modal-5" class="btn" @click="addFeature">添加</label>
             </div>
           </div>
         </div>
@@ -78,23 +84,28 @@
         <!-- head -->
         <thead>
           <tr>
-            <th>NAME</th>
-            <th>JOB</th>
-
+            <th>Level</th>
+            <th>Name</th>
+            <th>DevName</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Status</th>
             <th>Operate</th>
           </tr>
         </thead>
         <tbody>
           <!-- row 1 -->
-          <tr v-for="(item,index) in userStore.userList" :key="index">
-            <th>{{item.username}}</th>
+          <tr v-for="(item,index) in featureStore.featureList" :key="index">
+            <td>
+              <div class="font-bold">{{item.level}}</div>
+            </td>
+            <td>{{item.name}}</td>
+            <td>{{item.devname}}</td>
+            <td>{{item.start}}</td>
+            <td>{{item.end}}</td>
+             <td>{{item.status}}</td>
             <th>
-              <button class="btn btn-primary" v-if="item.type==1">TEST</button>
-              <button class="btn btn-secondary" v-else-if="item.type==2">DEVELOPER</button>
-              <button class="btn btn-accent" v-else>Manager</button>
-            </th>
-            <th>
-              <button class="btn btn-accent">DELETE</button>
+              <button class="btn btn-ghost btn-xs">delete</button>
             </th>
           </tr>
         </tbody>
@@ -113,28 +124,38 @@
 </template>
 
 <script setup>
-import { reactive, onMounted, ref } from "vue";
+import { ref, onMounted ,reactive ,watch } from "vue";
+import usefeatureStore from "../stores/featureList";
 import userListStore from "../stores/userList";
 const userStore = userListStore();
-
-let username = ref();
-let password = ref();
-let type = ref("");
+const featureStore = usefeatureStore();
+let featurename = ref();
+let level =ref();
+let devname = ref();
+let devId=ref();
+let devList=reactive([]);
 onMounted(async () => {
-  userStore.initUserList();
+  await featureStore.initFeatureList();
+  await userStore.initUserList();
+  devList.push(...(userStore.userList.filter(item=>item.type==2)))
 });
-let adduser =async () => {
-  if(username.value&&password.value&&type.value){
-    userStore.addUser({
-    username:username.value,
-    password:password.value,
-    type:type.value
-  })
+let addFeature = async()=>{
+  if(featurename.value&&level.value&&devname.value){
+    featureStore.addFeature({
+    name:featurename.value,
+    devid:devId.value,
+    level:level.value})
   }else{
-    alert("请输入完整参数")
+    alert("请传入完整参数")
   }
-};
+}
+watch(devname,(newValue)=>{
+  console.log(newValue);
+  devId.value=devList.filter(item=>item.username==newValue)[0]._id
+})
+
+
 </script>
 
 <style>
-</style>
+</style>    
