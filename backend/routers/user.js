@@ -28,6 +28,12 @@ user.post("/", async (req, res, next) => {
 
 user.get("/", async (req, res, next) => {
   const { authorization } = req.headers;
+  if (!authorization) {
+    return res.json({
+      status: false,
+      msg: "没有token",
+    });
+  }
   const result = decode(authorization);
   if (result) {
     const data = await UserModel.findById(result._id);
