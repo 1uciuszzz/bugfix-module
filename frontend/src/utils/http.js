@@ -9,7 +9,7 @@ const api = {
   auth: "/auth",
   user: "/user",
   userList:"/user/getall",
-  FeatureList:"/feature"
+  featureList:"/feature"
 };
 
 export { http, api };

@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { http, api } from "../utils/http.js";
 import userStore from "../stores/userList"
+import featureStore from "../stores/featureList"
 const useBugfixStore = defineStore("bugfix", {
   state: () => {
     return {
@@ -31,7 +32,8 @@ const useBugfixStore = defineStore("bugfix", {
     },
   },
   modules:{
-    userStore
+    userStore,
+    featureStore
   }
 });
 export default useBugfixStore;
