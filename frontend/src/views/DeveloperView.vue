@@ -120,4 +120,10 @@
 
 <script setup>
 import DeveloperStatusChangeModalVue from "../components/DeveloperStatusChangeModal.vue";
+import useBugfixStore from "../stores/bugfix";
+import { useRouter } from "vue-router";
+import { reactive } from "vue";
+const bugfixStore = useBugfixStore();
+const router = useRouter();
+const list = reactive([]);
 </script>
