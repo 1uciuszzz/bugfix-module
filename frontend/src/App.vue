@@ -7,4 +7,7 @@
 
 <script setup>
 import NavBarVue from "./components/NavBar.vue";
+import useBugfixStore from "./stores/bugfix";
+const bugfixStore = useBugfixStore();
+bugfixStore.get_user_info();
 </script>
