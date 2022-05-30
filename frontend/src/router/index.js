@@ -23,6 +23,11 @@ const router = createRouter({
       component: DeveloperView,
     },
     {
+      path: "/test",
+      name: "test",
+      component: ()=>import("../views/TestView.vue"),
+    },
+    {
       path: "/notfound",
       name: "notfound",
       component: NotFound,
