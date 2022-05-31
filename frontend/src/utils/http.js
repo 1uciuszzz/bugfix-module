@@ -9,12 +9,13 @@ const api = {
   auth: "/auth",
   user: "/user",
 
-  userList:"/user/getall",
-  featureList:"/feature",
+  userList: "/user/getall",
+  featureList: "/feature",
 
-  getTestList:"/test/showtest", //获取所有测试
-  addTestItem:"/test/addtest" //新增测试
-
+  getTestList: "/test/showtest", //获取所有测试
+  addTestItem: "/test/addtest", //新增测试
+  getBugsByFeature: "/bug/getbugsbyfeature",
+  setBugStatus: "/bug/setstatus",
 };
 
 export { http, api };
