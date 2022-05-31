@@ -8,14 +8,13 @@ const feature = express.Router();
 
 feature.get("/", async (req, res, next) => {
   const queries = req.query;
-  if (Object.keys(queries).length === 0) {
-    const result = await FeatureModel.find();
-    return res.json({
-      status: true,
-      data: result,
-    });
+  const params = {};
+  for (const key in queries) {
+    if (queries[key]) {
+      params[key] = queries[key];
+    }
   }
-  let result = await FeatureModel.find(queries);
+  const result = await FeatureModel.find(queries);
   return res.json({
     status: true,
     data: result,

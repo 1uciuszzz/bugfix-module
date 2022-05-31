@@ -9,7 +9,11 @@ import router from "./../router/index";
 const useBugfixStore = defineStore("bugfix", {
   state: () => {
     return {
-      user_info: {},
+      user_info: {
+        username: "",
+        type: "",
+        _id: "",
+      },
       dev_features: [],
       feature_detail: {
         feature: {
@@ -37,8 +41,13 @@ const useBugfixStore = defineStore("bugfix", {
       });
       if (!data.status) {
         router.replace("/signin");
+        return;
       }
-      this.user_info = data.data;
+      this.user_info = {
+        username: data.data.username,
+        type: data.data.type,
+        _id: data.data._id,
+      };
     },
     async get_features_by_filter(payload) {
       const params = {};
@@ -67,7 +76,6 @@ const useBugfixStore = defineStore("bugfix", {
       const { data } = await http.patch(`${api.setBugStatus}/${payload._id}`, {
         bugstatus: payload.bugstatus,
       });
-      console.log(data.data);
       this.feature_detail.bugs = this.feature_detail.bugs.map((b) => {
         if (b._id === data.data._id) {
           return data.data;
