@@ -55,6 +55,23 @@ const router = createRouter({
       path: "/test",
       name: "test",
       component: () => import("../views/TestView.vue"),
+      children:[
+        {
+          path:'',
+          name:"",
+          component:()=>import("../components/TestChildAddTest.vue")
+        },
+        {
+          path:"addtest",
+          name:"addtest",
+          component:()=>import("../components/TestChildAddTest.vue")
+        },
+        {
+          path:"addbug",
+          name:"addbug",
+          component:()=>import("../components/TestChildAddBug.vue")
+        }
+      ]
     },
     {
       path: "/notfound",
