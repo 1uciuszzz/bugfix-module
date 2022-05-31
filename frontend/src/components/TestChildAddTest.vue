@@ -34,7 +34,7 @@
             <th>{{ item.name }}</th>
             <td>{{ item.testname }}</td>
             <td>{{ item.username }}</td>
-            <td>{{ item.start}}</td>
+            <td>{{ new Date(item.start).toLocaleString()}}</td>
             <td>{{ item.end }}</td>
           </tr>
         </tbody>
@@ -47,7 +47,6 @@
 import AddTest from "../components/AddTest.vue"
 import {onMounted,reactive, watch} from "vue"
 import useTestStore from '../stores/test.js'
-
 //防抖封装
 let debounceFn = (callback, delay)=>{
   let timer = null;

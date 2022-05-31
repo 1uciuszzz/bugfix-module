@@ -44,8 +44,12 @@ const useBugStore = defineStore("bugStore", {
       if(data.status){
         this.bugList = this.bugList.map(item=>{
           if(item._id == payload._id){
-            item.bugstatus = payload.bugstatus
+            item.bugstatus = payload.bugstatus;
+            if(payload.bugstatus == 4){
+              item.end = new Date().toISOString();
+            }
           }
+          return item;
         })
       }
     }

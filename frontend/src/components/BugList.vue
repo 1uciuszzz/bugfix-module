@@ -41,21 +41,14 @@
             </button>
             <button class="btn btn-info" v-else>一般</button>
           </td>
-          <td>{{ item.start }}</td>
-          <td>{{ item.end }}</td>
+          <td>{{ new Date(item.start).toLocaleString() }}</td>
+          <td>{{ item.end ? new Date(item.end ).toLocaleString() : null}}</td>
           <td>{{ item.fj }}</td>
           <td>{{ item.devname }}</td>
           <td>
             <button class="btn btn-error" v-if="item.bugstatus == '1'">
               待解决
             </button>
-            <!-- <button
-              class="btn btn-info"
-              v-else-if="item.bugstatus == '2'"
-              @click="changeShow()"
-            >
-              待验收
-            </button> -->
             <div v-else-if="item.bugstatus == '2'">
               <label :for="item._id" class="btn modal-button">待验收</label>
               <input type="checkbox" :id="item._id" class="modal-toggle" />
@@ -103,17 +96,18 @@
 import { ref, onMounted } from "vue";
 import useBugStore from "../stores/bugList.js";
 
+
 let bugStore = useBugStore();
 let isShow = ref(false);
 
-onMounted(() => {
-  bugStore.getTestList();
+onMounted(async() => {
+  await bugStore.getTestList();
 });
 
 
-let changeStatus = (_id, bugstatus) => {
+let changeStatus = async(_id, bugstatus) => {
   isShow.value = false;
-  bugStore.changeBug({_id:_id, bugstatus:bugstatus});
+  await bugStore.changeBug({_id:_id, bugstatus:bugstatus});
 };
 </script>
 

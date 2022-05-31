@@ -104,7 +104,7 @@ let featureid = ref("0");
 let bugname = ref("");
 let bugtype = ref("0");
 let level = ref("0");
-let devid = ref('0');
+let devid = ref("0");
 let testid = ref("0");
 onMounted(async () => {
   featrueStore.initFeatureList();
@@ -115,27 +115,32 @@ watch(featureid, () => {
   testStore.gettestByfeatureid({ featureid: featureid.value });
 });
 
-let add = ()=>{
-  let name = featrueStore.featureList.filter(item  => item._id == featureid.value)[0].name;
-  let devname = bugStore.devList.filter(item => item._id==devid.value)[0].username;
-  let testname = testStore.byFeatureidList.filter(item => item._id == testid.value)[0].testname
+let add = () => {
+  let name = featrueStore.featureList.filter(
+    (item) => item._id == featureid.value
+  )[0].name;
+  let devname = bugStore.devList.filter((item) => item._id == devid.value)[0]
+    .username;
+  let testname = testStore.byFeatureidList.filter(
+    (item) => item._id == testid.value
+  )[0].testname;
   bugStore.addBug({
-    bugname:bugname.value,
-    bugtype:bugtype.value,
-    devid:devid.value,
+    bugname: bugname.value,
+    bugtype: bugtype.value,
+    devid: devid.value,
     devname,
-    level:level.value,
-    featureid:featureid.value,
-    testid:testid.value,
-    testname
-  })
-   featureid = ref("0");
- bugname = ref("");
- bugtype = ref("0");
- level = ref("0");
- devid = ref('0');
- testid = ref("0");
-}
+    level: level.value,
+    featureid: featureid.value,
+    testid: testid.value,
+    testname,
+  });
+  featureid.value = ref("0");
+  bugname.value = ref("");
+  bugtype.value = ref("0");
+  level.value = ref("0");
+  devid.value = ref("0");
+  testid.value = ref("0");
+};
 </script>
 
 <style>

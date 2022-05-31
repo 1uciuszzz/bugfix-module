@@ -59,7 +59,8 @@ const router = createRouter({
         {
           path:'',
           name:"",
-          component:()=>import("../components/TestChildAddTest.vue")
+          // component:()=>import("../components/TestChildAddTest.vue")
+          redirect:"/test/addtest"
         },
         {
           path:"addtest",
