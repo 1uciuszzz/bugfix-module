@@ -4,6 +4,7 @@ import HomeView from "../views/HomeView.vue";
 import AboutView from "../views/AboutView.vue";
 import DeveloperView from "../views/DeveloperView.vue";
 import SignInView from "../views/SignIn.vue";
+import BugsInFeature from "../views/BugsInFeature.vue";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -28,7 +29,11 @@ const router = createRouter({
       name: "developer",
       component: DeveloperView,
     },
-    
+    {
+      path: "/developer/feature/:id",
+      name: "feature-detail",
+      component: BugsInFeature,
+    },
     {
       path: "/manager",
       name: "manager",
@@ -45,9 +50,9 @@ const router = createRouter({
           component: () => import("../components/PersonManage.vue"),
         },
         {
-          path:"feature",
-          name:"feature",
-          component:()=>import("../components/FeatureList.vue")
+          path: "feature",
+          name: "feature",
+          component: () => import("../components/FeatureList.vue"),
         },
       ],
     },
@@ -55,23 +60,23 @@ const router = createRouter({
       path: "/test",
       name: "test",
       component: () => import("../views/TestView.vue"),
-      children:[
+      children: [
         {
-          path:'',
-          name:"",
-          component:()=>import("../components/TestChildAddTest.vue")
+          path: "",
+          name: "",
+          component: () => import("../components/TestChildAddTest.vue"),
         },
         {
-          path:"addtest",
-          name:"addtest",
-          component:()=>import("../components/TestChildAddTest.vue")
+          path: "addtest",
+          name: "addtest",
+          component: () => import("../components/TestChildAddTest.vue"),
         },
         {
-          path:"addbug",
-          name:"addbug",
-          component:()=>import("../components/TestChildAddBug.vue")
-        }
-      ]
+          path: "addbug",
+          name: "addbug",
+          component: () => import("../components/TestChildAddBug.vue"),
+        },
+      ],
     },
     {
       path: "/notfound",

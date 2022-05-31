@@ -9,6 +9,7 @@ const api = {
   auth: "/auth",
   user: "/user",
 
+
   userList:"/user/getall",
   featureList:"/feature",
 
@@ -22,6 +23,7 @@ const api = {
   getAll:"/user/getall",//获取开发人员
   addBug:"/bug/addbug",
   updateBug:"/bug/updatebug"
+
 };
 
 export { http, api };
