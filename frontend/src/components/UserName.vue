@@ -20,7 +20,7 @@
   </li>
 </template>
 <script setup>
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import useBugfixStore from "../stores/bugfix";
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -28,8 +28,13 @@ const bugfixStore = useBugfixStore();
 const user = computed(() => {
   return bugfixStore.user_info;
 });
+
 const handleClick = () => {
-  bugfixStore.user_info = {};
+  bugfixStore.user_info = {
+    username: "",
+    type: "",
+    _id: "",
+  };
   localStorage.removeItem("token");
   router.replace("/signin");
 };
