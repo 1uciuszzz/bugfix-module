@@ -5,16 +5,16 @@
         <div class="flex-none">
           <ul class="menu menu-horizontal p-0">
             <li>
-              <router-link class="nav-btn" to="/manager/person">PersonManage</router-link>
+              <router-link class="nav-btn" to="/manager/">PersonManage</router-link>
             </li>
             <li>
               <router-link class="nav-btn ml-5" to="/manager/feature">FeatureList</router-link>
             </li>
             <li>
-              <a>BugList</a>
+              <router-link class="nav-btn ml-5" to="/manager/testlist">TestList</router-link>
             </li>
             <li>
-              <a>TestList</a>
+             <router-link class="nav-btn ml-5" to="/manager/buglist">BugList</router-link>
             </li>
              
           </ul>
