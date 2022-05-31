@@ -18,9 +18,12 @@ const BugSchema = mongoose.Schema({
   devname:String,
   devid:String,
   level:Number,
+  userid:String,
+  username:String,
+  featureid:String,
+  name:String,
   testid:String,
-  featureid:String
-
+  testname:String
 });
 
 const BugModel = mongoose.model("bug", BugSchema);
