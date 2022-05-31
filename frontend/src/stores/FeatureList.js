@@ -15,8 +15,6 @@ const featureListStore = defineStore("featureList", {
       let {data} = await http.post(api.featureList,payload,{headers: { Authorization: localStorage.getItem("token") }})
        this.featureList.push(data.data) 
     }
-
-
   },
 
 });
