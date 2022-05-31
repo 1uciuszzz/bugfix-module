@@ -1,18 +1,18 @@
 import express from "express";
 import FeatureModel from "../schemas/FeatureSchema.js";
 import UserModel from "../schemas/UserSchema.js";
+import BugModel from "../schemas/BugSchema.js";
 import { decode } from "../utils/jwt.js";
 
 const feature = express.Router();
 
 feature.get("/", async (req, res, next) => {
   const queries = req.query;
-  if (queries.length === 0) {
-    const result = await FeatureModel.find();
-    return res.json({
-      status: true,
-      data: result,
-    });
+  const params = {};
+  for (const key in queries) {
+    if (queries[key]) {
+      params[key] = queries[key];
+    }
   }
   const result = await FeatureModel.find(queries);
   return res.json({

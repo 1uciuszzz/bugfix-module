@@ -50,7 +50,7 @@ user.get("/", async (req, res, next) => {
   }
 });
 
-user.get("/getall", async (req, res, nex) => {
+user.get("/getall", async (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization) {
     return res.json({
@@ -63,12 +63,46 @@ user.get("/getall", async (req, res, nex) => {
     let data = await UserModel.find();
     res.json({
       status: true,
-      msg: "获取成功" ,
+      msg: "获取成功",
       data
     })
   } else {
     return res.json({ status: false, msg: "无效的token" });
   }
+})
+
+user.get("/search", async (req, res, next) => {
+  const { authorization } = req.headers;
+  if (!authorization) {
+    return res.json({
+      status: false,
+      msg: "没有token",
+    });
+  }
+  const result = decode(authorization);
+  if (result) {
+    let { keyword, jobtype } = req.query
+    console.log(keyword,jobtype);
+    let params = {}
+    if (keyword) {
+      params.username = new RegExp(keyword)
+    }
+    if (jobtype) {
+      params.type = jobtype
+    }
+    console.log(params);
+    let data = await UserModel.find(params)
+    res.json({
+      status:true,
+      msg:"查找成功",
+      data
+    })
+
+  } else {
+    return res.json({ status: false, msg: "无效的token" });
+  }
+
+
 })
 
 export default user;

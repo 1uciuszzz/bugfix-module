@@ -1,9 +1,42 @@
 import express from "express";
 import BugModel from "../schemas/BugSchema.js";
-import FeatureModel from "../schemas/FeatureSchema.js"
+import FeatureModel from "../schemas/FeatureSchema.js";
 import { decode } from "../utils/jwt.js";
 
 const bug = express.Router();
+
+bug.get("/getbugsbyfeature/:id", async (req, res, next) => {
+    const { id } = req.params;
+    const { authorization } = req.headers;
+    if (!authorization) {
+        return res.json({
+            status: false,
+            msg: "没有token",
+        });
+    }
+    const tokenData = decode(authorization);
+    const feature = await FeatureModel.findById(id);
+    const bugs = await BugModel.find({
+        featureid: feature._id,
+        devid: tokenData._id,
+    });
+    return res.json({
+        status: true,
+        feature,
+        bugs,
+    });
+});
+
+bug.patch("/setstatus/:id", async (req, res, next) => {
+    const { id } = req.params;
+    const { bugstatus } = req.body;
+    await BugModel.updateOne({ _id: id }, { bugstatus: bugstatus });
+    const result = await BugModel.findById(id);
+    return res.json({
+        status: true,
+        data: result,
+    });
+});
 
 bug.get("/getallbug", async (req, res, next) => {
     const { authorization } = req.headers;
@@ -22,10 +55,10 @@ bug.get("/getallbug", async (req, res, next) => {
             msg: "success",
             data: reply
         })
+
     } else {
         return res.json({ status: false, msg: "无效的token" });
     }
-
 });
 
 bug.post("/addbug", async (req, res, next) => {
@@ -58,18 +91,18 @@ bug.post("/addbug", async (req, res, next) => {
     } else {
         return res.json({ status: false, msg: "无效的token" });
     }
-})
+});
 
 bug.patch("/updatebug", async (req, res, next) => {
     const { authorization } = req.headers;
     const result = decode(authorization);
     let { _id, bugstatus } = req.body
-    let end =null
-    if(bugstatus == '4'){
+    let end = null
+    if (bugstatus == '4') {
         end = new Date().toISOString()
     }
     if (result) {
-        let reply = await BugModel.updateOne({ _id }, { $set: { bugstatus,end } })
+        let reply = await BugModel.updateOne({ _id }, { $set: { bugstatus, end } })
         if (reply.acknowledged == 1) {
             res.json({
                 status: true, msg: "修改成功"
@@ -83,27 +116,28 @@ bug.patch("/updatebug", async (req, res, next) => {
     } else {
         return res.json({ status: false, msg: "无效的token" });
     }
-})
+});
 
 bug.delete("/deletebug", async (req, res, next) => {
     const { authorization } = req.headers;
     const result = decode(authorization);
-    let { bugid } = req.body
+    let { bugid } = req.body;
     if (result) {
-        let reply = await BugModel.remove({ _id: bugid })
+        let reply = await BugModel.remove({ _id: bugid });
         if (reply.acknowledged == 1) {
             res.json({
-                status: true, msg: "删除成功"
-            })
+                status: true,
+                msg: "删除成功",
+            });
         } else {
             res.json({
                 status: false,
-                msg: "删除失败"
-            })
+                msg: "删除失败",
+            });
         }
     } else {
         return res.json({ status: false, msg: "无效的token" });
     }
-})
+});
 
 export default bug;
