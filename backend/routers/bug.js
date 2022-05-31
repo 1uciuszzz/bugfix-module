@@ -2,7 +2,6 @@ import express from "express";
 import BugModel from "../schemas/BugSchema.js";
 import FeatureModel from "../schemas/FeatureSchema.js"
 import { decode } from "../utils/jwt.js";
-import FeatureModel from "./../schemas/FeatureSchema.js";
 
 const bug = express.Router();
 

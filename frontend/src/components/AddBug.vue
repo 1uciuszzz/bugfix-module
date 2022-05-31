@@ -92,7 +92,7 @@
 
 <script setup>
 import { ref, onMounted, watch, reactive } from "vue";
-import featureListStore from "../stores/FeatureList.js";
+import featureListStore from "../stores/featureList.js";
 import useTestStore from "../stores/test.js";
 import useBugStore from "../stores/bugList.js";
 

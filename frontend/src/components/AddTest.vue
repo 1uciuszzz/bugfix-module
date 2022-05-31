@@ -43,7 +43,7 @@
 //需要合并后获得 查询所有项目名称的store
 import {ref,onMounted} from "vue"
 import useTestStore from "../stores/test.js";
-import featureListStore from "../stores/FeatureList.js"
+import featureListStore from "../stores/featureList.js"
 import { http,api } from "../utils/http.js";
 
 let testStore = useTestStore();

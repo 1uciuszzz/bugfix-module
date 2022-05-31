@@ -76,7 +76,7 @@
     </div>
     <div class="overflow-x-auto w-full">
       <table class="table w-full text-center">
-        <!-- head -->
+
         <thead>
           <tr>
             <th>NAME</th>
@@ -86,16 +86,16 @@
           </tr>
         </thead>
         <tbody>
-          <!-- row 1 -->
+ 
           <tr v-for="(item,index) in userStore.userList" :key="index">
             <th>{{item.username}}</th>
             <th>
-              <button class="btn btn-primary" v-if="item.type==1">TEST</button>
-              <button class="btn btn-secondary" v-else-if="item.type==2">DEVELOPER</button>
+              <button class="btn btn-error" v-if="item.type==1">TEST</button>
+              <button class="btn btn-ghost" v-else-if="item.type==2">DEVELOPER</button>
               <button class="btn btn-accent" v-else>Manager</button>
             </th>
             <th>
-              <button class="btn btn-accent">DELETE</button>
+              <button class="btn btn-ghost">DELETE</button>
             </th>
           </tr>
         </tbody>
