@@ -11,13 +11,10 @@ test.get('/', (req, res, next) => {
 })
 //测试人员新增测试
 test.post("/addtest", async (req, res, next) => {
-  let {testname,featureid=1,name} = req.body
-  // let {testname,featureid=1,name} = req.body.data.payload
+  let {testname,featureid,name} = req.body
   if (testname && featureid && name) {
     let { authorization } = req.headers
-    console.log(authorization)
     let info = decode(authorization);
-    console.log(info)
     if (info) {
       if (info.type == "1") {
         let start = new Date().toUTCString()
@@ -96,8 +93,8 @@ test.get("/showtest", async(req, res, next) => {
   let { authorization } = req.headers
   let info = decode(authorization);
   if (info) {
-    if (info.type == "1") {
-      let {testname} = req.params
+    if (info.type == "1" || info.type == "0") {
+      let {testname,featureid} = req.query
       let reg = new RegExp(testname)
       let result = await TestModel.find({ userid: info._id,testname:reg })
       res.json({
@@ -114,11 +111,37 @@ test.get("/showtest", async(req, res, next) => {
   } else {
     res.json({
       status: false,
-      msg: "token错误,请重新登录"
+      msg:4
     })
   }
 })
 
+//根据featureid 查看所属测试
+test.get("/gettestByfeatureid",async(req,res,next)=>{
+  let { authorization } = req.headers
+  let info = decode(authorization);
+  if (info) {
+    if (info.type == "1" || info.type == "0") {
+      let {featureid} = req.query
+      let result = await TestModel.find({ userid: info._id,featureid })
+      res.json({
+        status: true,
+        msg: "ok",
+        result
+      })
+    } else {
+      res.json({
+        status: false,
+        msg: '权限不够'
+      })
+    }
+  } else {
+    res.json({
+      status: false,
+      msg:4
+    })
+  }
+})
 
 
 

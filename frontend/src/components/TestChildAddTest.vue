@@ -71,7 +71,7 @@ watch(()=>parmas.key,debounceFn(()=>{
 
 
 onMounted(()=>{
-  testStore.getTestList();
+  testStore.getTestList({testname:parmas.key});
 })
 
 </script>
