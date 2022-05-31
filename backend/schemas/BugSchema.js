@@ -5,7 +5,7 @@ const BugSchema = mongoose.Schema({
   bugtype:String,
   start:{
     type:String,
-    default:new Date().toLocaleString()
+    default:new Date().toISOString()
   },
   end:{
       type:String,

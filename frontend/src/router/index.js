@@ -75,11 +75,10 @@ const router = createRouter({
       component: () => import("../views/TestView.vue"),
       children: [
         {
-
-          path: '',
-          name: "",
-          component: () => import("../components/TestChildAddTest.vue")
-
+          path:'',
+          name:"",
+          // component:()=>import("../components/TestChildAddTest.vue")
+          redirect:"/test/addtest"
         },
         {
           path: "addtest",

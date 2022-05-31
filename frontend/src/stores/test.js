@@ -35,7 +35,7 @@ const useTestStore = defineStore("testStore", {
         headers: { authorization: localStorage.getItem("token") }
       })
       if (data.status) {
-        this.testList.push(data.result)
+        this.testList.push(data.result[0])
       }
     }
   }
