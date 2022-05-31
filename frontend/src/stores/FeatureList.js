@@ -19,6 +19,12 @@ const featureListStore = defineStore("featureList", {
       });
       this.featureList.push(data.data);
     },
+
+    async addFeature(payload){
+      let {data} = await http.post(api.featureList,payload,{headers: { Authorization: localStorage.getItem("token") }})
+       this.featureList.push(data.data) 
+    }
+
   },
 });
 export default featureListStore;
