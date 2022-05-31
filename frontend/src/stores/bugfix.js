@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { http, api } from "../utils/http.js";
 
 import userStore from "../stores/userList";
-import featureStore from "../stores/featureList";
+import featureStore from "./featureList";
 
 import router from "./../router/index";
 
