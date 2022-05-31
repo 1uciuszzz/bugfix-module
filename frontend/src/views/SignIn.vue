@@ -62,7 +62,6 @@ const handle_signin = async () => {
       case "2":
         router.replace("/developer");
         return;
-
     }
   } else {
     alert(result.msg);
