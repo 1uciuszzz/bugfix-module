@@ -4,6 +4,7 @@ import HomeView from "../views/HomeView.vue";
 import AboutView from "../views/AboutView.vue";
 import DeveloperView from "../views/DeveloperView.vue";
 import SignInView from "../views/SignIn.vue";
+import BugsInFeature from "../views/BugsInFeature.vue";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -30,6 +31,12 @@ const router = createRouter({
     },
 
     {
+      path: "/developer/feature/:id",
+      name: "feature-detail",
+      component: BugsInFeature,
+    },
+
+    {
       path: "/manager",
       name: "manager",
       component: () => import("../views/ManagerView.vue"),
@@ -53,6 +60,7 @@ const router = createRouter({
           path: "testlist",
           name: "testlist",
           component: () => import("../components/TestChildAddTest.vue")
+
         },
         {
           path: "buglist",
@@ -67,21 +75,27 @@ const router = createRouter({
       component: () => import("../views/TestView.vue"),
       children: [
         {
+
           path: '',
           name: "",
           component: () => import("../components/TestChildAddTest.vue")
+
         },
         {
           path: "addtest",
           name: "addtest",
+
           component: () => import("../components/TestChildAddTest.vue")
+
         },
         {
           path: "addbug",
           name: "addbug",
+
           component: () => import("../components/TestChildAddBug.vue")
         }
       ]
+
     },
     {
       path: "/notfound",

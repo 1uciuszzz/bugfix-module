@@ -1,12 +1,13 @@
 <template>
   <div class="navbar shadow-md">
     <div class="flex-1">
-      <router-link to="/" class="btn btn-ghost normal-case text-xl"
+      <router-link to="/" class="btn btn-ghost normal-case text-xl gap-2"
         ><font-awesome-icon icon="wrench" />Bugfix - Module</router-link
       >
     </div>
     <div class="flex-none">
       <ul class="menu menu-horizontal p-0">
+        <UserNameVue />
         <li>
           <router-link to="/">
             <font-awesome-icon icon="house" />
@@ -25,4 +26,6 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import UserNameVue from "./UserName.vue";
+</script>
