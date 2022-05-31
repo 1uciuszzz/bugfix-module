@@ -93,7 +93,7 @@
             <th>Operate</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="">
           <!-- row 1 -->
           <tr v-for="(item,index) in featureStore.featureList" :key="index">
             <td>
@@ -141,16 +141,21 @@ onMounted(async () => {
 });
 let addFeature = async()=>{
   if(featurename.value&&level.value&&devname.value){
-    featureStore.addFeature({
+    await featureStore.addFeature({
     name:featurename.value,
     devid:devId.value,
     level:level.value})
+    devId.value=""
+    featurename.value=""
+    level.value=""
+    devname.value=""
+
   }else{
     alert("请传入完整参数")
   }
 }
 watch(devname,(newValue)=>{
-  console.log(newValue);
+  if(!newValue) return false;
   devId.value=devList.filter(item=>item.username==newValue)[0]._id
 })
 

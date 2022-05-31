@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto">
+  <div class="w-10/12 mx-auto">
     <div class=" my-8 bg-slate-400 rounded-md">
       <div class="navbar ">
         <div class="flex-none">
