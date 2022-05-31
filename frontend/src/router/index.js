@@ -29,11 +29,13 @@ const router = createRouter({
       name: "developer",
       component: DeveloperView,
     },
+
     {
       path: "/developer/feature/:id",
       name: "feature-detail",
       component: BugsInFeature,
     },
+
     {
       path: "/manager",
       name: "manager",
@@ -52,8 +54,19 @@ const router = createRouter({
         {
           path: "feature",
           name: "feature",
-          component: () => import("../components/FeatureList.vue"),
+          component: () => import("../components/FeatureList.vue")
         },
+        {
+          path: "testlist",
+          name: "testlist",
+          component: () => import("../components/TestChildAddTest.vue")
+
+        },
+        {
+          path: "buglist",
+          name: "buglist",
+          component: () => import("../components/TestChildAddBug.vue")
+        }
       ],
     },
     {
@@ -62,21 +75,27 @@ const router = createRouter({
       component: () => import("../views/TestView.vue"),
       children: [
         {
-          path: "",
+
+          path: '',
           name: "",
-          component: () => import("../components/TestChildAddTest.vue"),
+          component: () => import("../components/TestChildAddTest.vue")
+
         },
         {
           path: "addtest",
           name: "addtest",
-          component: () => import("../components/TestChildAddTest.vue"),
+
+          component: () => import("../components/TestChildAddTest.vue")
+
         },
         {
           path: "addbug",
           name: "addbug",
-          component: () => import("../components/TestChildAddBug.vue"),
-        },
-      ],
+
+          component: () => import("../components/TestChildAddBug.vue")
+        }
+      ]
+
     },
     {
       path: "/notfound",

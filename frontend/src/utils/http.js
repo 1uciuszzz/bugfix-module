@@ -12,6 +12,7 @@ const api = {
 
   userList:"/user/getall",
   featureList:"/feature",
+  searchUser:"/user/search",
 
   //测试相关
   getTestList:"/test/showtest", //获取所有测试

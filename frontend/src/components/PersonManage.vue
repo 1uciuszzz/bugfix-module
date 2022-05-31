@@ -3,8 +3,8 @@
     <div class="mb-6">
       <div class="form-control flex-row">
         <div class="input-group">
-          <input type="text" placeholder="Search…" class="input input-bordered" />
-          <button class="btn btn-square">
+          <input type="text" placeholder="Search…" class="input input-bordered"  v-model="keyword"/>
+          <button class="btn btn-square" @click="search">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-6 w-6"
@@ -20,13 +20,14 @@
               />
             </svg>
           </button>
-          <select class="select select-bordered mx-6">
+
+
+          <select class="select select-bordered mx-6" v-model="jobtype">
             <option disabled selected>Pick Job</option>
-            <option>Star Wars</option>
-            <option>Harry Potter</option>
-            <option>Lord of the Rings</option>
-            <option>Planet of the Apes</option>
-            <option>Star Trek</option>
+            <option value="0">Manager</option>
+            <option value="1">Test</option>
+            <option value="2">Developer</option>
+
           </select>
         </div>
         <label for="my-modal-5" class="btn modal-button">ADDPERSON</label>
@@ -120,6 +121,8 @@ const userStore = userListStore();
 let username = ref();
 let password = ref();
 let type = ref("");
+let keyword = ref("");
+let jobtype=ref("")
 onMounted(async () => {
   userStore.initUserList();
 });
@@ -134,6 +137,9 @@ let adduser =async () => {
     alert("请输入完整参数")
   }
 };
+let search = async () =>{
+ await userStore.searchUser({keyword:keyword.value,jobtype:jobtype.value})
+}
 </script>
 
 <style>
