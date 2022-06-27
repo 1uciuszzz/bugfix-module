@@ -19,9 +19,9 @@ server.use("/api/v1/feature", feature);
 server.use("/api/v1/test", test);
 server.use("/api/v1/upload", upload);
 
-// server.listen(8000, () => {
-//   console.log("服务器启动在端口8000");
-// });
+server.listen(8000, () => {
+  console.log("服务器启动在端口8000");
+});
 
 import WebSocket, { WebSocketServer } from "ws";
 

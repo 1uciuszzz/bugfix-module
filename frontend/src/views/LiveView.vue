@@ -54,7 +54,7 @@ onMounted(() => {
   dp = new DPlayer({
     container: v_container.value,
     video: {
-      url: "https://hlstct.douyucdn2.cn/dyliveflv3a/7888428r7hgI8wMf.m3u8?txSecret=8ddfb26e76f2a7870c87f2425abee121&txTime=6297235c&token=h5-douyu-0-7888428-481b2a4b425356159a85d2c840866ad1&did=0697988899de757a0f3634ab00001631&origin=tct&vhost=play4",
+      url: "https://hlstct.douyucdn2.cn/dyliveflv1/606118r6n9kQ9krJ_2000.m3u8?txSecret=1e369add5e98ad1f844ef78ec1a1c67d&txTime=62b9a6cf&token=h5-douyu-0-606118-c6b8a42c40e4e34f06b061f92c0a0ecd&did=0697988899de757a0f3634ab00001631&origin=tct&vhost=play1",
       type: "customHls",
       customType: {
         customHls: function (video, player) {
