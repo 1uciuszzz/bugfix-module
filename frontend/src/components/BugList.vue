@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="hover " v-for="item in bugStore.bugList" :key="item._id">
+        <tr class="hover" v-for="item in bugStore.bugList" :key="item._id">
           <th>{{ item.name }}</th>
           <th>{{ item.testname }}</th>
           <td>{{ item.bugname }}</td>
@@ -42,8 +42,8 @@
             <button class="btn btn-info" v-else>一般</button>
           </td>
           <td>{{ new Date(item.start).toLocaleString() }}</td>
-          <td>{{ item.end ? new Date(item.end ).toLocaleString() : null}}</td>
-          <td>{{ item.fj }}</td>
+          <td>{{ item.end ? new Date(item.end).toLocaleString() : null }}</td>
+          <td>{{ item.extend }}</td>
           <td>{{ item.devname }}</td>
           <td>
             <button class="btn btn-error" v-if="item.bugstatus == '1'">
@@ -56,8 +56,18 @@
                 <div class="modal-box">
                   <p class="py-4">验收通过？</p>
                   <div class="modal-action">
-                    <label :for="item._id" class="btn" @click="changeStatus(item._id,4)">通过</label>
-                    <label :for="item._id" class="btn" @click="changeStatus(item._id,3)">不通过</label>
+                    <label
+                      :for="item._id"
+                      class="btn"
+                      @click="changeStatus(item._id, 4)"
+                      >通过</label
+                    >
+                    <label
+                      :for="item._id"
+                      class="btn"
+                      @click="changeStatus(item._id, 3)"
+                      >不通过</label
+                    >
                   </div>
                 </div>
               </div>
@@ -84,7 +94,6 @@
             >
               驳回
             </button>
-            
           </td>
         </tr>
       </tbody>
@@ -96,20 +105,17 @@
 import { ref, onMounted } from "vue";
 import useBugStore from "../stores/bugList.js";
 
-
 let bugStore = useBugStore();
 let isShow = ref(false);
 
-onMounted(async() => {
+onMounted(async () => {
   await bugStore.getTestList();
 });
 
-
-let changeStatus = async(_id, bugstatus) => {
+let changeStatus = async (_id, bugstatus) => {
   isShow.value = false;
-  await bugStore.changeBug({_id:_id, bugstatus:bugstatus});
+  await bugStore.changeBug({ _id: _id, bugstatus: bugstatus });
 };
 </script>
 
-<style>
-</style>
+<style></style>

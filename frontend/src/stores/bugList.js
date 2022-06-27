@@ -1,59 +1,65 @@
 import { defineStore } from "pinia";
-import { http, api } from "../utils/http.js"
+import { http, api, base } from "../utils/http.js";
 
 const useBugStore = defineStore("bugStore", {
   state: () => {
     return {
       bugList: [],
-      devList:[]
-    }
+      devList: [],
+    };
   },
   actions: {
     //获取所有bug列表
     async getTestList() {
-      let { data } = await http.get(api.getBugList,{
+      let { data } = await http.get(api.getBugList, {
         headers: { authorization: localStorage.getItem("token") },
-      })
+      });
       if (data.status) {
-        this.bugList = data.data
+        this.bugList = data.data;
       }
     },
     //新增bug
-    async addBug(payload) { 
+    async addBug(payload) {
       let { data } = await http.post(api.addBug, payload, {
-        headers: { authorization: localStorage.getItem("token") }
-      })
+        headers: { authorization: localStorage.getItem("token") },
+      });
+      const { data: file } = await http.post(api.extend, payload.extend, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       if (data.status) {
-        this.bugList.push(data.data)
+        data.data.extend = `${base}${file.path}`;
+        this.bugList.push(data.data);
       }
     },
     //查询开发人员列表
-    async getall(payload){
-      let {data} = await http.get(api.getAll,{
+    async getall(payload) {
+      let { data } = await http.get(api.getAll, {
         headers: { authorization: localStorage.getItem("token") },
-      })
-      if(data.status){
-        this.devList = data.data.filter(item=>item.type == '2')
+      });
+      if (data.status) {
+        this.devList = data.data.filter((item) => item.type == "2");
       }
     },
     //更改bug状态
-    async changeBug(payload){
-      let {data} = await http.patch(api.updateBug,payload,{
-        headers:{authorization:localStorage.getItem("token")}
-      })
-      if(data.status){
-        this.bugList = this.bugList.map(item=>{
-          if(item._id == payload._id){
+    async changeBug(payload) {
+      let { data } = await http.patch(api.updateBug, payload, {
+        headers: { authorization: localStorage.getItem("token") },
+      });
+      if (data.status) {
+        this.bugList = this.bugList.map((item) => {
+          if (item._id == payload._id) {
             item.bugstatus = payload.bugstatus;
-            if(payload.bugstatus == 4){
+            if (payload.bugstatus == 4) {
               item.end = new Date().toISOString();
             }
           }
           return item;
-        })
+        });
       }
-    }
-  }
-})
+    },
+  },
+});
 
-export default useBugStore
+export default useBugStore;

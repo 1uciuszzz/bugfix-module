@@ -11,6 +11,8 @@
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
     "axios": "^0.27.2",
     "daisyui": "^2.15.1",
+    "dplayer": "^1.26.0",
+    "hls.js": "^1.1.5",
     "pinia": "^2.0.13",
     "vue": "^3.2.33",
     "vue-router": "^4.0.14"

@@ -5,7 +5,7 @@
     <div class="modal">
       <div class="modal-box">
         <h3 class="font-bold text-lg text-center">新增bug</h3>
-        <form>
+        <form @submit.prevent="add">
           <div class="input-group mt-1">
             <span class="w-4/12 text-center">功能名</span>
             <select class="select select-bordered w-8/12" v-model="featureid">
@@ -75,10 +75,22 @@
                 <option value="3">一般</option>
               </select>
             </div>
+            <label class="btn btn-outline mt-1" for="extend">
+              <p v-if="!hasFile">点击上传一张图片（注意是"一"张）</p>
+              <img class="h-10" v-else :src="picSrc" alt="pic" />
+            </label>
+            <input
+              @change="handleFile"
+              class="hidden"
+              type="file"
+              name="extend"
+              id="extend"
+              accept=".jpg,.png"
+            />
           </div>
           <div class="flex justify-evenly">
             <div class="confirm modal-action">
-              <label for="my-modal" class="btn" @click="add">确认</label>
+              <button type="submit" for="my-modal" class="btn">确认</button>
             </div>
             <div class="modal-action">
               <label for="my-modal" class="btn">返回</label>
@@ -95,7 +107,6 @@ import { ref, onMounted, watch, reactive } from "vue";
 import featureListStore from "../stores/featureList.js";
 import useTestStore from "../stores/test.js";
 import useBugStore from "../stores/bugList.js";
-
 let featrueStore = featureListStore();
 let testStore = useTestStore();
 let bugStore = useBugStore();
@@ -106,6 +117,16 @@ let bugtype = ref("0");
 let level = ref("0");
 let devid = ref("0");
 let testid = ref("0");
+let picSrc = ref("");
+let hasFile = ref(false);
+const handleFile = (e) => {
+  hasFile.value = true;
+  const { files } = e.target;
+  if (!files[0]) {
+    return;
+  }
+  picSrc.value = URL.createObjectURL(files[0]);
+};
 onMounted(async () => {
   featrueStore.initFeatureList();
   bugStore.getall();
@@ -115,7 +136,13 @@ watch(featureid, () => {
   testStore.gettestByfeatureid({ featureid: featureid.value });
 });
 
-let add = () => {
+let add = async (e) => {
+  const formData = new FormData(e.target);
+  const file = formData.get("extend");
+  // let result = null;
+  // if (file) {
+  //   result = await bugStore.upload(formData);
+  // }
   let name = featrueStore.featureList.filter(
     (item) => item._id == featureid.value
   )[0].name;
@@ -133,6 +160,8 @@ let add = () => {
     featureid: featureid.value,
     testid: testid.value,
     testname,
+    name,
+    extend: file,
   });
   featureid.value = ref("0");
   bugname.value = ref("");
@@ -143,5 +172,4 @@ let add = () => {
 };
 </script>
 
-<style>
-</style>
+<style></style>

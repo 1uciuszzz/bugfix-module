@@ -5,6 +5,7 @@ import AboutView from "../views/AboutView.vue";
 import DeveloperView from "../views/DeveloperView.vue";
 import SignInView from "../views/SignIn.vue";
 import BugsInFeature from "../views/BugsInFeature.vue";
+import LiveView from "../views/LiveView.vue";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -29,7 +30,11 @@ const router = createRouter({
       name: "developer",
       component: DeveloperView,
     },
-
+    {
+      path: "/live",
+      name: "live",
+      component: LiveView,
+    },
     {
       path: "/developer/feature/:id",
       name: "feature-detail",
@@ -54,19 +59,18 @@ const router = createRouter({
         {
           path: "feature",
           name: "feature",
-          component: () => import("../components/FeatureList.vue")
+          component: () => import("../components/FeatureList.vue"),
         },
         {
           path: "testlist",
           name: "testlist",
-          component: () => import("../components/TestChildAddTest.vue")
-
+          component: () => import("../components/TestChildAddTest.vue"),
         },
         {
           path: "buglist",
           name: "buglist",
-          component: () => import("../components/TestChildAddBug.vue")
-        }
+          component: () => import("../components/TestChildAddBug.vue"),
+        },
       ],
     },
     {
@@ -75,26 +79,24 @@ const router = createRouter({
       component: () => import("../views/TestView.vue"),
       children: [
         {
-          path:'',
-          name:"",
+          path: "",
+          name: "",
           // component:()=>import("../components/TestChildAddTest.vue")
-          redirect:"/test/addtest"
+          redirect: "/test/addtest",
         },
         {
           path: "addtest",
           name: "addtest",
 
-          component: () => import("../components/TestChildAddTest.vue")
-
+          component: () => import("../components/TestChildAddTest.vue"),
         },
         {
           path: "addbug",
           name: "addbug",
 
-          component: () => import("../components/TestChildAddBug.vue")
-        }
-      ]
-
+          component: () => import("../components/TestChildAddBug.vue"),
+        },
+      ],
     },
     {
       path: "/notfound",

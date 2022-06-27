@@ -94,6 +94,14 @@ const useBugfixStore = defineStore("bugfix", {
       );
       this.feature_detail = data;
     },
+    // async upload(payload) {
+    //   const { data } = await http.post(api.extend, payload, {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //     },
+    //   });
+    //   console.log(data);
+    // },
   },
   // modules: {
   //   userStore,

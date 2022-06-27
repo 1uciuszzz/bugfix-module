@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const base = "http://localhost:8000/api/v1";
+
 const http = axios.create({
-  baseURL: "http://localhost:8000/api/v1",
+  baseURL: base,
 });
 
 const api = {
@@ -10,6 +12,7 @@ const api = {
   user: "/user",
   setBugStatus: "/bug/setstatus",
   getBugsByFeature: "/bug/getbugsbyfeature",
+  extend: "/upload/extend",
 
   userList: "/user/getall",
   featureList: "/feature",
@@ -27,4 +30,4 @@ const api = {
   updateBug: "/bug/updatebug",
 };
 
-export { http, api };
+export { http, api, base };
